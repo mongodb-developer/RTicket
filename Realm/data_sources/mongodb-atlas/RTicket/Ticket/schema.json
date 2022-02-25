@@ -1,0 +1,35 @@
+{
+    "bsonType": "object",
+    "properties": {
+        "_id": {
+            "bsonType": "objectId"
+        },
+        "created": {
+            "bsonType": "date"
+        },
+        "problemDescription": {
+            "bsonType": "string"
+        },
+        "product": {
+            "bsonType": "string"
+        },
+        "reportedBy": {
+            "bsonType": "string"
+        },
+        "status": {
+            "bsonType": "string"
+        },
+        "title": {
+            "bsonType": "string"
+        }
+    },
+    "required": [
+        "_id",
+        "reportedBy",
+        "product",
+        "title",
+        "created",
+        "status"
+    ],
+    "title": "Ticket"
+}

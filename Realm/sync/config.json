@@ -1,0 +1,23 @@
+{
+    "type": "flexible",
+    "state": "enabled",
+    "development_mode_enabled": true,
+    "service_name": "mongodb-atlas",
+    "database_name": "RTicket",
+    "permissions": {
+        "rules": {},
+        "defaultRoles": [
+            {
+                "name": "read-write",
+                "applyWhen": {},
+                "read": true,
+                "write": true
+            }
+        ]
+    },
+    "queryable_fields_names": [
+        "\"created\"",
+        "\"status\"",
+        "product"
+    ]
+}
