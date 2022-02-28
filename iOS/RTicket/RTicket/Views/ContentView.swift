@@ -12,11 +12,18 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            if let username = username {
-                ProductsView(username: username)
-            } else {
-                LoginView(username: $username)
+            Group {
+                if let username = username {
+                    ProductsView(username: username)
+                } else {
+                    if useEmailPasswordAuth {
+                        EmailLoginView(username: $username)
+                    } else {
+                        LoginView(username: $username)
+                    }
+                }
             }
+            .navigationBarItems(trailing: username != nil && useEmailPasswordAuth ? LogoutButton(username: $username) : nil)
         }
     }
 }

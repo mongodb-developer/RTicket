@@ -11,8 +11,7 @@ struct LoginView: View {
     @Binding var username: String?
     
     var body: some View {
-        Text("Logging in......")
-            .foregroundColor(.yellow)
+        ProgressView()
             .task {
                 await login()
             }
@@ -28,7 +27,7 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct View_Previews: PreviewProvider {
     static var previews: some View {
         LoginView(username: .constant(nil))
     }

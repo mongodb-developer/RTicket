@@ -16,9 +16,11 @@ struct ProductsView: View {
         List {
             ForEach(products, id: \.self) { product in
                 if !isPreview {
-                    NavigationLink(destination: TicketsView(product: product, username: username)
-                                    .environment(\.realmConfiguration, realmApp.currentUser!.flexibleSyncConfiguration())) {
-                        Text(product)
+                    if let currentUser = realmApp.currentUser {
+                        NavigationLink(destination: TicketsView(product: product, username: username)
+                                        .environment(\.realmConfiguration, currentUser.flexibleSyncConfiguration())) {
+                            Text(product)
+                        }
                     }
                 } else {
                     NavigationLink(destination: TicketsView(product: product, username: username, isPreview: true)) {

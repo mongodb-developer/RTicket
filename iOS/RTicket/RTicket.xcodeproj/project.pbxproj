@@ -19,6 +19,8 @@
 		0A37C0B527C929D400B5A7A7 /* TicketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A37C0B427C929D400B5A7A7 /* TicketsView.swift */; };
 		0A37C0B727C9362700B5A7A7 /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A37C0B627C9362700B5A7A7 /* TicketView.swift */; };
 		0A37C0B927C9397C00B5A7A7 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A37C0B827C9397C00B5A7A7 /* DateView.swift */; };
+		0AF4B64627CD0F5300B25992 /* EmailLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4B64527CD0F5300B25992 /* EmailLoginView.swift */; };
+		0AF4B64827CD110800B25992 /* LogoutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4B64727CD110800B25992 /* LogoutButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		0A37C0B427C929D400B5A7A7 /* TicketsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsView.swift; sourceTree = "<group>"; };
 		0A37C0B627C9362700B5A7A7 /* TicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
 		0A37C0B827C9397C00B5A7A7 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
+		0AF4B64527CD0F5300B25992 /* EmailLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginView.swift; sourceTree = "<group>"; };
+		0AF4B64727CD110800B25992 /* LogoutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 		0A37C0AC27C9219600B5A7A7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0A37C0BA27CD062600B5A7A7 /* Optional */,
 				0A37C09B27C91F5100B5A7A7 /* ContentView.swift */,
 				0A37C0AE27C921E900B5A7A7 /* LoginView.swift */,
 				0A37C0B227C9275800B5A7A7 /* ProductsView.swift */,
@@ -103,6 +108,15 @@
 				0A37C0B027C924E900B5A7A7 /* Ticket.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0A37C0BA27CD062600B5A7A7 /* Optional */ = {
+			isa = PBXGroup;
+			children = (
+				0AF4B64527CD0F5300B25992 /* EmailLoginView.swift */,
+				0AF4B64727CD110800B25992 /* LogoutButton.swift */,
+			);
+			path = Optional;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +196,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AF4B64627CD0F5300B25992 /* EmailLoginView.swift in Sources */,
+				0AF4B64827CD110800B25992 /* LogoutButton.swift in Sources */,
 				0A37C0B527C929D400B5A7A7 /* TicketsView.swift in Sources */,
 				0A37C0AF27C921E900B5A7A7 /* LoginView.swift in Sources */,
 				0A37C0B927C9397C00B5A7A7 /* DateView.swift in Sources */,
