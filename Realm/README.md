@@ -12,7 +12,8 @@ This is the backend Realm app for RTicket.
 git clone git@github.com:ClusterDB/RTicket.git
 cd Realm/src
 realm-cli login --api-key <your new public key> --private-api-key <your new private key>
-realm-cli import # Then answer prompts, naming the app Realm-Draw
+realm-cli import # Then answer prompts, naming the app RTicket
+# For best performance use the same region as your Atlas cluster
 ```
 4. From the Atlas UI, click on the Realm logo and you will see the RTicket app. Open it and copy the App Id
 
