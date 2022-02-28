@@ -21,10 +21,14 @@ struct TicketsView: View {
     @State private var inProgress = false
     
     var body: some View {
+        let filteredTickets = searchText == "" ? tickets : tickets.where {
+            $0.title.contains(searchText, options: .caseInsensitive) ||
+            $0.problemDescription.contains(searchText, options: .caseInsensitive)
+        }
         return ZStack {
             VStack {
                 List {
-                    ForEach(tickets) { ticket in
+                    ForEach(filteredTickets) { ticket in
                         TicketView(ticket: ticket)
                     }
                 }
@@ -33,6 +37,7 @@ struct TicketsView: View {
                 VStack {
                     TextField("Ticket title", text: $title)
                     TextField("Ticket description", text: $description)
+                        .font(.caption)
                     Button(action: addTicket) {
                         Text("Add Ticket")
                     }
@@ -54,16 +59,12 @@ struct TicketsView: View {
     private func setSubscriptions() {
         let subscriptions = realm.subscriptions
         if subscriptions.first(named: product) == nil {
-            print("Setting subscription for \(product)")
             inProgress = true
-            subscriptions.write {
+            subscriptions.write() {
                 subscriptions.append(QuerySubscription<Ticket>(name: product) { ticket in
                     ticket.product == product
                 })
-            }
-            // TODO: This seems to be needed atm (10.22.0) so that the view is refreshed once
-            // the tickets have been found
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            } onComplete: { _ in
                 inProgress = false
             }
         }
