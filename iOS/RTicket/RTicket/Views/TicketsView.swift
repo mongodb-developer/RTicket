@@ -17,24 +17,34 @@ struct TicketsView: View {
     
     @State private var title = ""
     @State private var description = ""
+    @State private var searchText = ""
+    @State private var inProgress = false
     
     var body: some View {
-        VStack {
-            List {
-                ForEach(tickets) { ticket in
-                    TicketView(ticket: ticket)
-                }
-            }
-            Spacer()
+        return ZStack {
             VStack {
-                TextField("Ticket title", text: $title)
-                TextField("Ticket description", text: $description)
-                Button(action: addTicket) {
-                    Text("Add Ticket")
+                List {
+                    ForEach(tickets) { ticket in
+                        TicketView(ticket: ticket)
+                    }
                 }
-                .buttonStyle(.borderedProminent)
+                .searchable(text: $searchText)
+                Spacer()
+                VStack {
+                    TextField("Ticket title", text: $title)
+                    TextField("Ticket description", text: $description)
+                    Button(action: addTicket) {
+                        Text("Add Ticket")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(title == "")
+                }
+                .padding()
             }
-            .padding()
+            if inProgress {
+                ProgressView()
+            }
+            
         }
         .navigationBarTitle("\(product) Tickets", displayMode: .inline)
         .onAppear(perform: setSubscriptions)
@@ -44,10 +54,17 @@ struct TicketsView: View {
     private func setSubscriptions() {
         let subscriptions = realm.subscriptions
         if subscriptions.first(named: product) == nil {
+            print("Setting subscription for \(product)")
+            inProgress = true
             subscriptions.write {
                 subscriptions.append(QuerySubscription<Ticket>(name: product) { ticket in
                     ticket.product == product
                 })
+            }
+            // TODO: This seems to be needed atm (10.22.0) so that the view is refreshed once
+            // the tickets have been found
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                inProgress = false
             }
         }
     }
