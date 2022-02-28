@@ -10,13 +10,20 @@ import SwiftUI
 struct ProductsView: View {
     let username: String
     let products = ["Atlas", "Realm", "Search", "Charts"]
+    var isPreview = false
     
     var body: some View {
         List {
             ForEach(products, id: \.self) { product in
-                NavigationLink(destination: TicketsView(product: product, username: username)
-                                .environment(\.realmConfiguration, realmApp.currentUser!.flexibleSyncConfiguration())) {
-                    Text(product)
+                if !isPreview {
+                    NavigationLink(destination: TicketsView(product: product, username: username)
+                                    .environment(\.realmConfiguration, realmApp.currentUser!.flexibleSyncConfiguration())) {
+                        Text(product)
+                    }
+                } else {
+                    NavigationLink(destination: TicketsView(product: product, username: username, isPreview: true)) {
+                        Text(product)
+                    }
                 }
             }
         }
@@ -27,7 +34,7 @@ struct ProductsView: View {
 struct ProductsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ProductsView(username: "Andrew")
+            ProductsView(username: "Andrew", isPreview: true)
         }
     }
 }

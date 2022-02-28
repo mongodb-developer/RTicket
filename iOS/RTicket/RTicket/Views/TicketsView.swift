@@ -11,6 +11,7 @@ import RealmSwift
 struct TicketsView: View {
     let product: String
     let username: String
+    var isPreview = false
     
     @ObservedResults(Ticket.self, sortDescriptor: SortDescriptor(keyPath: "status", ascending: false)) var tickets
     @Environment(\.realm) var realm
@@ -57,23 +58,27 @@ struct TicketsView: View {
     }
     
     private func setSubscriptions() {
-        let subscriptions = realm.subscriptions
-        if subscriptions.first(named: product) == nil {
-            inProgress = true
-            subscriptions.write() {
-                subscriptions.append(QuerySubscription<Ticket>(name: product) { ticket in
-                    ticket.product == product
-                })
-            } onComplete: { _ in
-                inProgress = false
+        if !isPreview {
+            let subscriptions = realm.subscriptions
+            if subscriptions.first(named: product) == nil {
+                inProgress = true
+                subscriptions.write() {
+                    subscriptions.append(QuerySubscription<Ticket>(name: product) { ticket in
+                        ticket.product == product
+                    })
+                } onComplete: { _ in
+                    inProgress = false
+                }
             }
         }
     }
     
     private func clearSubscriptions() {
-        let subscriptions = realm.subscriptions
-        subscriptions.write {
-            subscriptions.remove(named: product)
+        if !isPreview {
+            let subscriptions = realm.subscriptions
+            subscriptions.write {
+                subscriptions.remove(named: product)
+            }
         }
     }
     
@@ -85,10 +90,13 @@ struct TicketsView: View {
     }
 }
 
-//struct TicketsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            TicketsView(product: "Realm", username: "Andrew")
-//        }
-//    }
-//}
+struct TicketsView_Previews: PreviewProvider {
+    static var previews: some View {
+        if !Ticket.areTicketsPopulated {
+            Ticket.bootstrapTickets()
+        }
+        return NavigationView {
+            TicketsView(product: "Realm", username: "Andrew", isPreview: true)
+        }
+    }
+}
