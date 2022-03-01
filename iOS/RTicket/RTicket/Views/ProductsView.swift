@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ProductsView: View {
     let username: String
-    let products = ["Atlas", "Realm", "Search", "Charts"]
     var isPreview = false
+    
+    let products = ["Atlas", "Realm", "Search", "Charts"]
     
     var body: some View {
         List {

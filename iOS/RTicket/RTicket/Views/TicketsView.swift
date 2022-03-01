@@ -11,6 +11,7 @@ import RealmSwift
 struct TicketsView: View {
     let product: String
     let username: String
+    let lastYear = Date(timeIntervalSinceReferenceDate: Date().timeIntervalSinceReferenceDate.rounded() - (60 * 60 * 24 * 365))
     var isPreview = false
     
     @ObservedResults(Ticket.self, sortDescriptor: SortDescriptor(keyPath: "status", ascending: false)) var tickets
@@ -63,9 +64,12 @@ struct TicketsView: View {
             if subscriptions.first(named: product) == nil {
                 inProgress = true
                 subscriptions.write() {
-                    subscriptions.append(QuerySubscription<Ticket>(name: product) { ticket in
-                        ticket.product == product
-                    })
+                subscriptions.append(QuerySubscription<Ticket>(name: product) { ticket in
+                    ticket.product == product &&
+                    (
+                        ticket.status != .complete || ticket.created > lastYear
+                    )
+                })
                 } onComplete: { _ in
                     inProgress = false
                 }
