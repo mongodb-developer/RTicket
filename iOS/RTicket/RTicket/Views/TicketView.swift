@@ -37,7 +37,7 @@ struct TicketView: View {
             }
             if ticket.status == .complete {
                 Button(action: { $ticket.status.wrappedValue = .inProgress }) {
-                    Label("In Progress", systemImage: "bolt.fill")
+                    Label("In Progress", systemImage: "bolt.circle.fill")
                 }
                 .tint(.yellow)
             }
@@ -45,13 +45,13 @@ struct TicketView: View {
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             if ticket.status == .inProgress {
                 Button(action: { $ticket.status.wrappedValue = .complete }) {
-                    Label("Complete", systemImage: "checkmark.rectangle")
+                    Label("Complete", systemImage: "checkmark.circle.fill")
                 }
                 .tint(.green)
             }
             if ticket.status == .notStarted {
                 Button(action: { $ticket.status.wrappedValue = .inProgress }) {
-                    Label("In Progress", systemImage: "bolt.fill")
+                    Label("In Progress", systemImage: "bolt.circle.fill")
                 }
                 .tint(.yellow)
             }
