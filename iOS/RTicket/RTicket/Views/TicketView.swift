@@ -24,7 +24,7 @@ struct TicketView: View {
             HStack {
                 Text(ticket.problemDescription ?? "Not a clue")
                     .font(.caption)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.secondary)
                 Spacer()
             }
         }

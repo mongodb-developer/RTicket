@@ -16,9 +16,7 @@ struct LogoutButton: View {
         Button("Logout") { isConfirming = true }
         .confirmationDialog("Are you that you want to logout",
                             isPresented: $isConfirming) {
-            Button(action: logout) {
-                Text("Confirm Logout")
-            }
+            Button("Confirm Logout", role: .destructive) { logout() }
             Button("Cancel", role: .cancel) {}
         }
     }

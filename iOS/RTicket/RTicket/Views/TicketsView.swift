@@ -23,14 +23,14 @@ struct TicketsView: View {
     @State private var inProgress = false
     
     var body: some View {
-        let filteredTickets = searchText == "" ? tickets : tickets.where {
+        let filteredTickets = tickets.where {
             $0.title.contains(searchText, options: .caseInsensitive) ||
             $0.problemDescription.contains(searchText, options: .caseInsensitive)
         }
         return ZStack {
             VStack {
                 List {
-                    ForEach(filteredTickets) { ticket in
+                    ForEach(searchText == "" ? tickets : filteredTickets) { ticket in
                         TicketView(ticket: ticket)
                     }
                 }
@@ -82,6 +82,10 @@ struct TicketsView: View {
             let subscriptions = realm.subscriptions
             subscriptions.write {
                 subscriptions.remove(named: product)
+            } onComplete: { error in
+                if let error = error {
+                    print("Failed to unsubscribe for \(product): \(error.localizedDescription)")
+                }
             }
         }
     }
