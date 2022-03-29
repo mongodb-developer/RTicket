@@ -49,6 +49,7 @@ struct EmailLoginView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
+                .disabled(email == "" || password == "")
                 Spacer()
                 Text(errorMessage)
                     .foregroundColor(.red)

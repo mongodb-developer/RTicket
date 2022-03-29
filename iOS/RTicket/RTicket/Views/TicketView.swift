@@ -61,8 +61,17 @@ struct TicketView: View {
 
 struct TicketView_Previews: PreviewProvider {
     static var previews: some View {
-        List {
-            TicketView(ticket: Ticket(reportedBy: "Andrew", product: "Realm", title: "Something is smoking", problemDescription: "I didn't touch anything! Honestly I didn't!"))
+        let ticket1 = Ticket(reportedBy: "Andrew", product: "Realm", title: "My big issue", problemDescription: "This is a big deal")
+        let ticket2 = Ticket(reportedBy: "Andrew", product: "Realm", title: "My second issue")
+        ticket2.status = .inProgress
+        let ticket3 = Ticket(reportedBy: "Andrew", product: "Realm", title: "Issue three", problemDescription: "This is not such a big deal. But I do want to talk about it at greate length. This is not such a big deal. But I do want to talk about it at greate length.")
+        ticket3.status = .complete
+        return NavigationView {
+            List {
+                TicketView(ticket: ticket1)
+                TicketView(ticket: ticket2)
+                TicketView(ticket: ticket3)
+            }
         }
     }
 }
