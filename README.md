@@ -11,6 +11,7 @@ For this app to work, you need both the backend and frontend apps...
 
 ## References
 ### Common
+- [Slides from MongoDB World 2022 workshop](https://docs.google.com/presentation/d/1ORbCHBs_1ehTLzYwv3-sZdR9qweQCH1NXWHU1eQsYtU/edit?usp=sharing)
 - [Realm Mobile on the DevHub](https://www.mongodb.com/developer/learn/?products=Mobile)
 - [Realm tutorials](https://docs.mongodb.com/realm/sdk/)
 - [MongoDB/Realm Community Forum](https://developer.mongodb.com/community/forums/)
