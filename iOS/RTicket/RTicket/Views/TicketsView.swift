@@ -63,7 +63,7 @@ struct TicketsView: View {
             let subscriptions = realm.subscriptions
             if subscriptions.first(named: product) == nil {
                 inProgress = true
-                subscriptions.write() {
+                subscriptions.update() {
                 subscriptions.append(QuerySubscription<Ticket>(name: product) { ticket in
                     ticket.product == product &&
                     (
@@ -80,7 +80,7 @@ struct TicketsView: View {
     private func clearSubscriptions() {
         if !isPreview {
             let subscriptions = realm.subscriptions
-            subscriptions.write {
+            subscriptions.update {
                 subscriptions.remove(named: product)
             } onComplete: { error in
                 if let error = error {
