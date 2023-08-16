@@ -71,7 +71,9 @@ struct TicketsView: View {
                     )
                 })
                 } onComplete: { _ in
-                    inProgress = false
+                    Task { @MainActor in
+                        inProgress = false
+                    }
                 }
             }
         }
